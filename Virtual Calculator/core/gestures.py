@@ -25,7 +25,6 @@ class GestureEngine:
         now = time.time()
         x, _ = lm[8]
 
-        # ---------- PINCH (CLICK) ----------
         pinching = self.is_pinch(lm)
 
         if pinching and not self.pinched:
@@ -41,7 +40,6 @@ class GestureEngine:
             self.pinched = False
             self.confirm_time = None
 
-        # ---------- SWIPE LEFT (BACKSPACE) ----------
         if self.prev_x is not None:
             dx = x - self.prev_x
             if dx < -40:  # fast left movement
@@ -50,7 +48,6 @@ class GestureEngine:
 
         self.prev_x = x
 
-        # ---------- CLOSED FIST (CLEAR) ----------
         if self.is_fist(lm):
             if self.swipe_time is None:
                 self.swipe_time = now
@@ -60,3 +57,4 @@ class GestureEngine:
             self.swipe_time = None
 
         return None
+
